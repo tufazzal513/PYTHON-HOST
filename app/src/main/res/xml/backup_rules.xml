@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- App-private project files are backed up by the OS full-backup, but we also
+         expose our own backup/restore feature. Exclude large caches. -->
+    <exclude domain="file" path="cache" />
+    <exclude domain="file" path="runtimes" />
+</full-backup-content>
