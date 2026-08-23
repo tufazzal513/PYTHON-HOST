@@ -16,5 +16,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PyMobileIDE"
+rootProject.name = "PY-HOST"
 include(":app")

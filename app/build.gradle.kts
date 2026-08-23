@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")
     id("com.chaquo.python")
 }
 
@@ -80,6 +79,13 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+
+    // For Kotlin 1.9.x the Compose compiler is configured via composeOptions.
+    // The org.jetbrains.kotlin.plugin.compose Gradle plugin is only available for Kotlin 2.0+.
+    // Compose compiler 1.5.14 is the version compatible with Kotlin 1.9.24.
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
 
     packaging {
