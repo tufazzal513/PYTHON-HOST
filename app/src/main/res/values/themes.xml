@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.PyMobile" parent="android:Theme.Material.NoActionBar">
+        <!-- We use Jetpack Compose Material 3 for the UI; this theme is used for the
+             window background / edge-to-edge before Compose takes over. -->
+        <item name="android:colorBackground">@color/ide_bg</item>
+        <item name="android:statusBarColor">@color/ide_bg</item>
+        <item name="android:navigationBarColor">@color/ide_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="29">false</item>
+    </style>
+</resources>

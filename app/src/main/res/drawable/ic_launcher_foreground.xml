@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Stylized "play / terminal" glyph for the Python Host app -->
+    <path
+        android:fillColor="#2F81F7"
+        android:pathData="M24,30 L24,78 L72,54 Z" />
+    <path
+        android:fillColor="#3FB950"
+        android:pathData="M44,72 L86,72 L86,78 L44,78 Z" />
+    <path
+        android:fillColor="#3FB950"
+        android:pathData="M80,66 L86,72 L80,78 Z" />
+</vector>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PyMobile IDE</string>
+    <string name="app_name_long">PyMobile IDE — Python Host</string>
+    <string name="app_tagline">Native Android Python IDE &amp; Project Runner</string>
+</resources>
