@@ -13,8 +13,8 @@ import com.python.localhost.logs.LogCategory
 import com.python.localhost.python.DependencyManager
 import com.python.localhost.python.InstallResult
 import com.python.localhost.process.RunHelper
-import com.python.localhost.process.RunState
-import com.python.localhost.process.RunStateInfo
+import com.python.localhost.python.RunState
+import com.python.localhost.python.RunStateInfo
 import com.python.localhost.project.ProjectManager
 import com.python.localhost.terminal.LineKind
 import com.python.localhost.terminal.TerminalLine
@@ -161,6 +161,8 @@ class TerminalVM(private val container: AppContainer, private val projectId: Str
 }
 
 class LogsVM(private val container: AppContainer, private val projectId: String) : ViewModel() {
+    val meta = container.projectManager.getProject(projectId)
+        ?: throw IllegalArgumentException("Project not found")
     val categories = LogCategory.values().toList()
     private val _category = MutableStateFlow(LogCategory.OUTPUT)
     val category: StateFlow<LogCategory> = _category.asStateFlow()

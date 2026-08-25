@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.Default.Refresh
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -92,8 +92,8 @@ fun ProjectDashboardScreen(nav: NavHostController, container: AppContainer, proj
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Text("Status", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.width(70.dp))
                     val color = when (runState?.state) {
-                        com.python.localhost.process.RunState.RUNNING -> MaterialTheme.colorScheme.secondary
-                        com.python.localhost.process.RunState.FAILED -> MaterialTheme.colorScheme.error
+                        com.python.localhost.python.RunState.RUNNING -> MaterialTheme.colorScheme.secondary
+                        com.python.localhost.python.RunState.FAILED -> MaterialTheme.colorScheme.error
                         else -> MaterialTheme.colorScheme.onSurfaceVariant
                     }
                     StatusChip(runState?.state?.name ?: "Ready", color)

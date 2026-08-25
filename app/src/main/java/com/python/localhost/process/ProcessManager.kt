@@ -1,5 +1,7 @@
 package com.python.localhost.process
 
+import com.python.localhost.logs.LogCategory
+import com.python.localhost.logs.LogManager
 import com.python.localhost.python.PythonRuntime
 import com.python.localhost.python.RunSession
 import com.python.localhost.python.RunState
@@ -17,13 +19,18 @@ data class RunRequest(
     val siteDirs: List<String>,
     // Note: siteDirs intentionally kept; see RunSession signature.
     val foreground: Boolean,
+    val workingDir: String = "",
 )
 
 /**
  * Tracks all running project executions and exposes their live state and output as
  * StateFlows so the UI (dashboard, running screen, terminal) can observe them.
  */
-class ProcessManager(private val runtime: PythonRuntime) {
+class ProcessManager(
+    private val runtime: PythonRuntime,
+    private val logManager: LogManager,
+) {
+    private var lastRequest: RunRequest? = null
     private val sessions = ConcurrentHashMap<String, RunSession>()
     private val buffers = ConcurrentHashMap<String, StringBuilder>()
     private val _states = MutableStateFlow<Map<String, RunStateInfo>>(emptyMap())
@@ -44,6 +51,7 @@ class ProcessManager(private val runtime: PythonRuntime) {
             env = req.env,
             siteDirs = req.siteDirs,
             foreground = req.foreground,
+            workingDir = req.workingDir,
             runtime = runtime,
             onState = { st -> updateState(st) },
             onOutput = { text ->

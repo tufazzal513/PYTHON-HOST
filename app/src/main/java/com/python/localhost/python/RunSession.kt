@@ -29,6 +29,7 @@ class RunSession(
     val env: Map<String, String>,
     val siteDirs: List<String>,
     val foreground: Boolean,
+    val workingDir: String = "",
     private val runtime: PythonRuntime,
     private val onState: (RunStateInfo) -> Unit,
     private val onOutput: (String) -> Unit,
@@ -51,7 +52,7 @@ class RunSession(
                 state = RunState.RUNNING
                 emit()
                 val listener = PyOutputListener { text -> onOutput(SecretMasker.mask(text)) }
-                val rc = runtime.runScript(scriptPath, argv, env, siteDirs, listener)
+                val rc = runtime.runScript(scriptPath, argv, env, siteDirs, listener, workingDir)
                 if (stopRequested.get()) {
                     state = RunState.STOPPED
                 } else {

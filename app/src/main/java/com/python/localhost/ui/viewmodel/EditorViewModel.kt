@@ -4,7 +4,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.mutableStateSetOf
 import androidx.lifecycle.ViewModel
 import com.python.localhost.data.ProjectMeta
 import com.python.localhost.di.AppContainer
@@ -24,7 +23,8 @@ class EditorViewModel(private val container: AppContainer, private val projectId
     private val _openTabs = mutableStateListOf<String>()
     private val _currentTab = mutableStateOf<String?>(null)
     val currentTab: State<String?> = _currentTab
-    private val _dirty = mutableStateSetOf<String>()
+    val openTabs: List<String> get() = _openTabs
+    private val _dirty = mutableStateListOf<String>()
 
     fun openFile(relPath: String) {
         if (!_contents.containsKey(relPath)) {

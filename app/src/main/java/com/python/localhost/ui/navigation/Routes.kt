@@ -15,6 +15,7 @@ object Routes {
     const val LOGS = "logs/{projectId}"
     const val GIT = "git/{projectId}"
     const val ENTRY_PICKER = "entry_picker/{projectId}"
+    const val DIAGNOSTICS = "diagnostics"
 
     fun dashboard(projectId: String) = "dashboard/$projectId"
     fun editor(projectId: String, file: String? = null) = "editor/$projectId?file=${file ?: ""}"

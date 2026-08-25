@@ -9,7 +9,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.python.localhost.di.AppContainer
 import com.python.localhost.ui.screens.CreateProjectScreen
-import com.python.localhost.ui.screens.EditorScreen
+import com.python.localhost.ui.screens.DiagnosticsScreen
+import com.python.localhost.ui.screens.IdeScreen
 import com.python.localhost.ui.screens.EntryPointPickerScreen
 import com.python.localhost.ui.screens.GitHubImportScreen
 import com.python.localhost.ui.screens.GitScreen
@@ -28,6 +29,7 @@ fun AppNavHost(container: AppContainer) {
     val nav = rememberNavController()
     NavHost(navController = nav, startDestination = Routes.HOME) {
         composable(Routes.HOME) { HomeScreen(nav, container) }
+        composable(Routes.DIAGNOSTICS) { DiagnosticsScreen(nav, container) }
         composable(Routes.PROJECTS) { ProjectsScreen(nav, container) }
         composable(Routes.RUNNING) { RunningScreen(nav, container) }
         composable(Routes.SETTINGS) { SettingsScreen(nav, container) }
@@ -63,7 +65,7 @@ fun AppNavHost(container: AppContainer) {
                 navArgument("file") { type = NavType.StringType; defaultValue = "" },
             ),
         ) {
-            EditorScreen(
+            IdeScreen(
                 nav, container,
                 it.arguments!!.getString("projectId")!!,
                 it.arguments!!.getString("file"),

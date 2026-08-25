@@ -29,6 +29,8 @@ object RunHelper {
         val scriptPath = if (entryFile.exists()) entryFile.absolutePath else File(dir, "main.py").absolutePath
         val env = buildEnv(dir, config)
         val siteDirs = listOf(dir.absolutePath, container.appDirs.packagesDir(meta.id).absolutePath)
+        val workdirFile = if (config.workingDir.isBlank()) dir else File(dir, config.workingDir)
+        val workdir = if (workdirFile.exists()) workdirFile.absolutePath else dir.absolutePath
         val argv = config.arguments.split("\\s+".toRegex()).filter { it.isNotEmpty() }
         val req = RunRequest(
             projectId = meta.id,
@@ -38,6 +40,7 @@ object RunHelper {
             env = env,
             siteDirs = siteDirs,
             foreground = foreground,
+            workingDir = workdir,
         )
         val status = container.processManager.startRun(req)
         if (foreground) {

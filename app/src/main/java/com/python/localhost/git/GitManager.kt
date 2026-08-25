@@ -1,8 +1,10 @@
 package com.python.localhost.git
 
+import com.python.localhost.data.GitStatusInfo
 import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.diff.DiffFormatter
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider
+import org.eclipse.jgit.treewalk.filter.PathFilter
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -30,7 +32,7 @@ class GitManager {
     fun diff(dir: File, relPath: String): String? {
         val git = open(dir) ?: return null
         return try {
-            val entries = git.diff().setPath(relPath).call()
+            val entries = git.diff().setPathFilter(PathFilter.create(relPath)).call()
             if (entries.isEmpty()) return "(no changes vs last commit)"
             val out = ByteArrayOutputStream()
             val formatter = DiffFormatter(out)

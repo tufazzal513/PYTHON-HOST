@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.python.localhost.di.AppContainer
-import com.python.localhost.process.RunStateInfo
+import com.python.localhost.python.RunStateInfo
 import com.python.localhost.ui.components.EmptyState
 import com.python.localhost.ui.components.IdeCard
 import com.python.localhost.ui.components.IdeTopBar
@@ -86,8 +86,8 @@ private fun RunningCard(
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Text(info.projectName, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
                 val color = when (info.state) {
-                    com.python.localhost.process.RunState.RUNNING -> MaterialTheme.colorScheme.secondary
-                    com.python.localhost.process.RunState.FAILED -> MaterialTheme.colorScheme.error
+                    com.python.localhost.python.RunState.RUNNING -> MaterialTheme.colorScheme.secondary
+                    com.python.localhost.python.RunState.FAILED -> MaterialTheme.colorScheme.error
                     else -> MaterialTheme.colorScheme.onSurfaceVariant
                 }
                 StatusChip(info.state.name, color)

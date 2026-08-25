@@ -41,10 +41,11 @@ class PythonRuntime(private val context: Context) {
         env: Map<String, String>,
         siteDirs: List<String>,
         listener: PyOutputListener,
+        workdir: String = "",
     ): Int {
         val module = py().getModule("pymobile")
         return module.callAttr(
-            "run_path_with_redirect", listener, scriptPath, argv, env, siteDirs
+            "run_path_with_redirect", listener, scriptPath, argv, env, siteDirs, workdir
         ).toInt()
     }
 
