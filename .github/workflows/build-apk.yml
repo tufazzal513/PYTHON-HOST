@@ -1,6 +1,6 @@
 name: Build APK
 
-on:
+"on":
   push:
     branches: [main, master, arena/**]
     tags:
@@ -42,7 +42,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles("**/*.gradle*", "**/gradle-wrapper.properties") }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             gradle-${{ runner.os }}-
 
@@ -64,7 +64,7 @@ jobs:
           echo "task=assemble${FIRST}${REST}" >> "$GITHUB_OUTPUT"
 
       - name: Decode keystore (release)
-        if: steps.variant.outputs.type == "release"
+        if: steps.variant.outputs.type == 'release'
         id: keystore
         env:
           KS_B64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
@@ -77,11 +77,11 @@ jobs:
           fi
 
       - name: Build Debug APK
-        if: steps.variant.outputs.type == "debug"
+        if: steps.variant.outputs.type == 'debug'
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Build Release APK (signed)
-        if: steps.variant.outputs.type == "release" && steps.keystore.outputs.present == "true"
+        if: steps.variant.outputs.type == 'release' && steps.keystore.outputs.present == 'true'
         env:
           PYMOBILE_KEYSTORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
           PYMOBILE_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
@@ -91,7 +91,7 @@ jobs:
           ./gradlew assembleRelease --stacktrace
 
       - name: Build Release APK (unsigned fallback)
-        if: steps.variant.outputs.type == "release" && steps.keystore.outputs.present != "true"
+        if: steps.variant.outputs.type == 'release' && steps.keystore.outputs.present != 'true'
         run: |
           echo "::warning::No signing secrets — building unsigned release APK."
           ./gradlew assembleRelease --stacktrace
@@ -114,7 +114,7 @@ jobs:
           if-no-files-found: error
 
       - name: Create GitHub Release (tag builds)
-        if: startsWith(github.ref, "refs/tags/v")
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           files: ${{ steps.apk.outputs.path }}

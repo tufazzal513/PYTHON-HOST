@@ -38,7 +38,7 @@ data class AppSettings(
     val showLineNumbers: Boolean = true,
     val autoSave: Boolean = true,
     val pipIndexUrl: String = "https://pypi.org/simple",
-    val pipExtraIndexUrl: String = "https://chaquo.com/pypi-17.0",
+    val pipExtraIndexUrl: String = "https://chaquo.com/pypi-13.1",
     val confirmDestructive: Boolean = true,
 )
 

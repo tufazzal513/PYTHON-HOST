@@ -22,17 +22,6 @@ android {
             // Add "x86" / "x86_64" here if you need emulator support on those ABIs.
             abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
         }
-
-        python {
-            // Embedded CPython version for v1. The Runtime Manager architecture allows
-            // additional versions to be added later (see core/runtime).
-            version = "3.11"
-            pip {
-                // Runtime dependency installation happens from inside the app via the
-                // Dependency Manager (pip is driven from the embedded interpreter).
-                // Nothing is baked into the APK by default, keeping the base APK small.
-            }
-        }
     }
 
     signingConfigs {
@@ -98,6 +87,19 @@ android {
     }
 }
 
+chaquopy {
+    defaultConfig {
+        // Embedded CPython version for v1. The Runtime Manager architecture allows
+        // additional versions to be added later (see core/runtime).
+        version = "3.11"
+        pip {
+            // Runtime dependency installation happens from inside the app via the
+            // Dependency Manager (pip is driven from the embedded interpreter).
+            // Nothing is baked into the APK by default, keeping the base APK small.
+        }
+    }
+}
+
 dependencies {
     val composeBom = "androidx.compose:compose-bom:2024.09.00"
     implementation(platform(composeBom))
@@ -118,7 +120,7 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.documentfile:documentfile:1.0.1")
-    implementation("androidx.security:security-crypto:1.0.0")
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation("com.google.code.gson:gson:2.11.0")

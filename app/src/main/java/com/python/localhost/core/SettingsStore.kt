@@ -31,8 +31,15 @@ class SettingsStore(
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
     )
 
-    fun getSettings(): AppSettings =
-        json.read(file, AppSettings::class.java) ?: AppSettings()
+    fun getSettings(): AppSettings {
+        val s = json.read(file, AppSettings::class.java) ?: return AppSettings()
+        // Migrate the old (incorrect) Chaquopy-only default index to the corrected pair.
+        return if (s.pipIndexUrl == "https://chaquo.com/pypi-17.0" && s.pipExtraIndexUrl.isEmpty()) {
+            s.copy(pipIndexUrl = "https://pypi.org/simple", pipExtraIndexUrl = "https://chaquo.com/pypi-13.1")
+        } else {
+            s
+        }
+    }
 
     fun saveSettings(s: AppSettings) = json.write(file, s)
 

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -20,10 +21,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.IconButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.Default.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IdeTopBar(
     title: String,
@@ -50,7 +51,7 @@ fun IdeTopBar(
         navigationIcon = {
             if (onBack != null) {
                 IconButton(onClick = onBack) {
-                    androidx.compose.material3.Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                    androidx.compose.material3.Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                 }
             }
         },
@@ -59,7 +60,7 @@ fun IdeTopBar(
 }
 
 @Composable
-fun PrimaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true) {
+fun PrimaryButton(text: String, modifier: Modifier = Modifier, enabled: Boolean = true, onClick: () -> Unit) {
     Button(onClick = onClick, modifier = modifier.fillMaxWidth(), enabled = enabled,
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)) {
         Text(text)
@@ -67,14 +68,14 @@ fun PrimaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifi
 }
 
 @Composable
-fun SecondaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true) {
+fun SecondaryButton(text: String, modifier: Modifier = Modifier, enabled: Boolean = true, onClick: () -> Unit) {
     OutlinedButton(onClick = onClick, modifier = modifier.fillMaxWidth(), enabled = enabled) {
         Text(text)
     }
 }
 
 @Composable
-fun DangerButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true) {
+fun DangerButton(text: String, modifier: Modifier = Modifier, enabled: Boolean = true, onClick: () -> Unit) {
     Button(onClick = onClick, modifier = modifier.fillMaxWidth(), enabled = enabled,
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)) {
         Text(text)

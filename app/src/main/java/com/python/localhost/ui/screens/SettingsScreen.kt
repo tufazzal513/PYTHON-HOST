@@ -58,12 +58,12 @@ fun SettingsScreen(nav: NavHostController, container: AppContainer) {
                     Text("Font size: ${settings.fontSize}sp", style = MaterialTheme.typography.labelMedium)
                     Slider(
                         value = settings.fontSize.toFloat(),
-                        onValueChange = { vm.update { it.copy(fontSize = it.coerceIn(10, 22).toInt()) } },
+                        onValueChange = { v -> vm.update { it.copy(fontSize = v.toInt().coerceIn(10, 22)) } },
                         valueRange = 10f..22f,
                     )
-                    SettingSwitch("Word wrap", settings.wordWrap) { vm.update { it.copy(wordWrap = it) } }
-                    SettingSwitch("Show line numbers", settings.showLineNumbers) { vm.update { it.copy(showLineNumbers = it) } }
-                    SettingSwitch("Auto save", settings.autoSave) { vm.update { it.copy(autoSave = it) } }
+                    SettingSwitch("Word wrap", settings.wordWrap) { checked -> vm.update { it.copy(wordWrap = checked) } }
+                    SettingSwitch("Show line numbers", settings.showLineNumbers) { checked -> vm.update { it.copy(showLineNumbers = checked) } }
+                    SettingSwitch("Auto save", settings.autoSave) { checked -> vm.update { it.copy(autoSave = checked) } }
                 }
             }
 
@@ -72,14 +72,14 @@ fun SettingsScreen(nav: NavHostController, container: AppContainer) {
                     SectionTitle("Dependency installation")
                     OutlinedTextField(
                         value = settings.pipIndexUrl,
-                        onValueChange = { vm.update { it.copy(pipIndexUrl = it) } },
+                        onValueChange = { v -> vm.update { it.copy(pipIndexUrl = v) } },
                         label = { Text("pip index URL") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                     )
                     OutlinedTextField(
                         value = settings.pipExtraIndexUrl,
-                        onValueChange = { vm.update { it.copy(pipExtraIndexUrl = it) } },
+                        onValueChange = { v -> vm.update { it.copy(pipExtraIndexUrl = v) } },
                         label = { Text("pip extra-index URL (Android wheels)") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth().padding(top = 8.dp),

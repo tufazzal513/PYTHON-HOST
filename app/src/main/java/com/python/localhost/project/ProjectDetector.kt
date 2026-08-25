@@ -35,10 +35,10 @@ class ProjectDetector {
             reqFile?.let { append(it.readText()); append("\n") }
             pyFiles.take(10).forEach { append(it.readText()); append("\n") }
         }
-        if (Regex("""\bflask\b""", RegexOption.IGNORECASE).containsMatchIn(content)) frameworks += "Flask"
-        if (Regex("""\bfastapi\b""", RegexOption.IGNORECASE).containsMatchIn(content)) frameworks += "FastAPI"
-        if (Regex("""python-telegram-bot|telebot|aiogram""", RegexOption.IGNORECASE).containsMatchIn(content)) frameworks += "Telegram Bot"
-        if (Regex("""discord\.py|\bdiscord\b""", RegexOption.IGNORECASE).containsMatchIn(content)) frameworks += "Discord Bot"
+        if (Regex("""\bflask\b""", RegexOption.IGNORE_CASE).containsMatchIn(content)) frameworks += "Flask"
+        if (Regex("""\bfastapi\b""", RegexOption.IGNORE_CASE).containsMatchIn(content)) frameworks += "FastAPI"
+        if (Regex("""python-telegram-bot|telebot|aiogram""", RegexOption.IGNORE_CASE).containsMatchIn(content)) frameworks += "Telegram Bot"
+        if (Regex("""discord\.py|\bdiscord\b""", RegexOption.IGNORE_CASE).containsMatchIn(content)) frameworks += "Discord Bot"
 
         val detected = entryCandidates.firstOrNull()
         val notes = mutableListOf<String>()
